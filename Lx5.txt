@@ -1,0 +1,80 @@
+C#企业级开发技术练习5答题卡
+
+班级：  信息管理1班
+姓名：     梁汉卿
+学号：     20190307121
+
+注：请将答案放置在序号下方。*/
+
+（一）
+namespace 命名空间打什么都没所谓的吧
+{
+    public class UserSys
+    {
+        public delegate void DLogin(object o, int n);
+        DLogin _elogin;
+        public event DLogin ELogin
+        {
+            add
+            { _elogin += value; }
+            remove
+            { _elogin -= value; }
+        }
+        int n = 10000;
+        public void login()
+        {
+            _elogin(this, ++n);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            UserSys user = new UserSys();
+            user.ELogin += (o, n) => Console.WriteLine($"{n}登录{o}成功");
+            user.login();
+            user.login();
+            user.login();
+        }
+    }
+}
+
+（二）
+using System;
+using System.Numerics;
+
+namespace 命名空间打什么都没所谓的吧
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string strl = "C#,java,python,golang,javascript,PHP,VB";
+            string[] str2 = strl.Split(',');
+            Array.Sort(str2, (a, b) => string.Compare(b.ToString(), a.ToString()));
+            string s = "";
+            foreach (var i in strl)
+                s += i.ToString();
+            string str3 = string.Join(",", str2);
+            Console.WriteLine(str3);
+
+        }
+    }
+}
+
+（三）
+       static void Main(string[] args)
+        {
+            MathSys math = new MathSys();
+            math.EFilter += num =>
+            {
+                
+                int[] pass = Array.FindAll(num, p => p%2 ==0);
+                int[] even = num;
+                Console.WriteLine("数组中的偶数如下：");
+                foreach (int i in pass)
+                    Console.WriteLine(i);
+            };
+            math.filter(new[] { 10, 8, 7, 21, 24 });
+        }
+    }
